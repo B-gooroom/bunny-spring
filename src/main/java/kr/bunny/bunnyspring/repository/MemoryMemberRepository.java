@@ -28,9 +28,9 @@ public class MemoryMemberRepository implements MemberRespository{
 //    public Optional<Member> findById(Long id) {
     // 배열에서는 Long -> int
     @Override
-    public Member findById(int id) {
+    public Optional<Member> findById(int id) {
         // optional.ofNumllable 로 감싸두면 반환되는 값이 null이어도 반환이 가능
-        return store.get(id);
+        return Optional.ofNullable(store.get(id));
 
     }
 
