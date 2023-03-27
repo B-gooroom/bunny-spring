@@ -1,11 +1,12 @@
 package kr.bunny.bunnyspring.service;
 
 import kr.bunny.bunnyspring.domain.Member;
-import kr.bunny.bunnyspring.repository.MemberRespository;
 import kr.bunny.bunnyspring.repository.MemoryMemberRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -37,8 +38,8 @@ class MemberServiceTest {
         Long saveId = memberService.join(member);
 
         //then
-        Member findMember =  memberService.findOne(0);
-        assertThat(member.getName()).isEqualTo(findMember.getName());
+        Optional<Member> findMember =  memberService.findOne(0);
+        assertThat(member.getName()).isEqualTo(findMember.get().getName());
     }
 
     @Test

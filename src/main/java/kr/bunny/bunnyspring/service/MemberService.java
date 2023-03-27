@@ -2,7 +2,6 @@ package kr.bunny.bunnyspring.service;
 
 import kr.bunny.bunnyspring.domain.Member;
 import kr.bunny.bunnyspring.repository.MemberRespository;
-import kr.bunny.bunnyspring.repository.MemoryMemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,7 +44,7 @@ public class MemberService  {
     }
 
 //    public Optional<Member> findOne(Long memberId) {
-      public Member findOne(int memberId) {
+      public Optional<Member> findOne(int memberId) {
         return memberRespository.findById(memberId);
     }
 }

@@ -1,11 +1,11 @@
 package kr.bunny.bunnyspring.repository;
 
 import kr.bunny.bunnyspring.domain.Member;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Optional;
 
 //검증 method(assertj)
 import static org.assertj.core.api.Assertions.*;
@@ -28,7 +28,7 @@ public class MemoryMemberRepositoryTest {
 //        overloading ex
         repository.save(0);
 
-        Member result = repository.findById(0);
+        Optional<Member> result = repository.findById(0);
         assertThat(member).isEqualTo(result);
 //        Assertions.assertEquals(member, result);
     }
