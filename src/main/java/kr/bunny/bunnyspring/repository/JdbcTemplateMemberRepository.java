@@ -33,7 +33,7 @@ public class JdbcTemplateMemberRepository implements MemberRespository{
     }
 
     @Override
-    public Optional<Member> findById(int id) {
+    public Optional<Member> findById(Long id) {
         List<Member> result = jdbcTemplate.query("select * from member where id = ?", memberRowMapper(), id);
         return result.stream().findAny();
     }

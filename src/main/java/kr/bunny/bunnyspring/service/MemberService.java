@@ -3,8 +3,8 @@ package kr.bunny.bunnyspring.service;
 import kr.bunny.bunnyspring.domain.Member;
 import kr.bunny.bunnyspring.repository.MemberRespository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,7 +12,7 @@ import java.util.Optional;
  * repository -> class 이름들이 단순함
  * service -> class 비즈니스 로직에 가까운 이름으로 설계
  */
-@Service
+@Transactional
 public class MemberService  {
 
     private final MemberRespository memberRespository;
@@ -44,7 +44,7 @@ public class MemberService  {
     }
 
 //    public Optional<Member> findOne(Long memberId) {
-      public Optional<Member> findOne(int memberId) {
+      public Optional<Member> findOne(Long memberId) {
         return memberRespository.findById(memberId);
     }
 }

@@ -28,7 +28,7 @@ public class MemoryMemberRepositoryTest {
 //        overloading ex
         repository.save(0);
 
-        Optional<Member> result = repository.findById(0);
+        Optional<Member> result = repository.findById(member.getId());
         assertThat(member).isEqualTo(result);
 //        Assertions.assertEquals(member, result);
     }

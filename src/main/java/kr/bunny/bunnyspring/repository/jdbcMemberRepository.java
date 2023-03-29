@@ -28,7 +28,7 @@ public class jdbcMemberRepository implements MemberRespository{
     }
 
     @Override
-    public Optional<Member> findById(int id) {
+    public Optional<Member> findById(Long id) {
         return null;
     }
 
