@@ -1,38 +1,36 @@
 package kr.bunny.bunnyspring.service;
 
 import kr.bunny.bunnyspring.domain.Member;
+import kr.bunny.bunnyspring.repository.MemberRespository;
 import kr.bunny.bunnyspring.repository.MemoryMemberRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Commit;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class MemberServiceTest {
+@SpringBootTest
+@Transactional
+class MemberServiceIntegrationTest {
 
-    MemberService memberService;
-    MemoryMemberRepository memberRepository;
+    @Autowired MemberService memberService;
+    @Autowired MemberRespository memberRespository;
 
-    @BeforeEach
-    public void beforeEach() {
-        memberRepository = new MemoryMemberRepository();
-        memberService = new MemberService(memberRepository);
-    }
-
-    @AfterEach
-    public void afterEach() {
-        memberRepository.clearStore();
-    }
-
+    /**회원가입 */
     @Test
+    //@Commit -> Transactional으로 data 리셋(반)
     void join() {
 
         //given
         Member member = new Member();
-        member.setName("spring");
+        member.setName("boot");
 
         //when
         Long saveId = memberService.join(member);
@@ -42,6 +40,7 @@ class MemberServiceTest {
         assertThat(member.getName()).isEqualTo(findMember.get().getName());
     }
 
+    /**중복확인 */
     @Test
     public void duplicate() {
         //given
@@ -60,11 +59,4 @@ class MemberServiceTest {
         //then
     }
 
-    @Test
-    void findMembers() {
-    }
-
-    @Test
-    void findOne() {
-    }
 }

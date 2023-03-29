@@ -5,19 +5,19 @@ import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
-@Repository
+//@Repository
 public class MemoryMemberRepository implements MemberRespository{
 
     // Map<Long, Member> = 객체 형식 -> List<Member> = 배열 형식
-//    private static Map<Long, Member> store = new HashMap<>();
-    private static List<Member> store = new ArrayList<>();
+    private static Map<Long, Member> store = new HashMap<>();
+//    private static List<Member> store = new ArrayList<>();
     private static long sequence = 0L;
 
     @Override
     public Member save(Member member) {
         member.setId(++sequence);
-//        store.put(member.getId(), member);
-        store.add(member);
+        store.put(member.getId(), member);
+//        store.add(member);
         return member;
     }
 //    overloading ex
@@ -28,7 +28,7 @@ public class MemoryMemberRepository implements MemberRespository{
 //    public Optional<Member> findById(Long id) {
     // 배열에서는 Long -> int
     @Override
-    public Optional<Member> findById(int id) {
+    public Optional<Member> findById(Long id) {
         // optional.ofNumllable 로 감싸두면 반환되는 값이 null이어도 반환이 가능
         return Optional.ofNullable(store.get(id));
 
@@ -36,15 +36,15 @@ public class MemoryMemberRepository implements MemberRespository{
 
     @Override
     public Optional<Member> findByName(String name) {
-        return store.stream()
+        return store.values().stream()
                 .filter(member -> member.getName().equals(name))
                 .findAny(); // 아무거나 하나라도 찾아지면 찾아오는함수
     }
 
     @Override
     public List<Member> findAll() {
-//        return new ArrayList<>(store.values());
-        return store;
+        return new ArrayList<>(store.values());
+//        return store;
     }
 
     public void clearStore() {
