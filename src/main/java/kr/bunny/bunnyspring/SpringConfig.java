@@ -1,5 +1,6 @@
 package kr.bunny.bunnyspring;
 
+import kr.bunny.bunnyspring.aop.TimeTraceAop;
 import kr.bunny.bunnyspring.domain.Member;
 import kr.bunny.bunnyspring.repository.JpaMemberRepository;
 import kr.bunny.bunnyspring.repository.MemberRespository;
@@ -43,6 +44,11 @@ public class SpringConfig {
     public MemberService memberService() {
         return new MemberService(memberRespository);
     }
+
+//    @Bean
+//    public TimeTraceAop timeTraceAop() {
+//        return new TimeTraceAop();
+//    }
 
 //    @Bean
 //    public MemberRespository memberRespository() {
