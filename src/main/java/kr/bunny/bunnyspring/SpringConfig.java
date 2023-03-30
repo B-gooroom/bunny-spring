@@ -1,5 +1,6 @@
 package kr.bunny.bunnyspring;
 
+import kr.bunny.bunnyspring.domain.Member;
 import kr.bunny.bunnyspring.repository.JpaMemberRepository;
 import kr.bunny.bunnyspring.repository.MemberRespository;
 import kr.bunny.bunnyspring.repository.MemoryMemberRepository;
@@ -24,20 +25,28 @@ public class SpringConfig {
 //        return new MemoryMemberRepository();
 //    }
 
-    private EntityManager em;
+    /**JPA 적용 */
+//    private EntityManager em;
+//
+//    @Autowired
+//    public SpringConfig(EntityManager em) {
+//        this.em = em;
+//    }
+
+    private final MemberRespository memberRespository;
 
     @Autowired
-    public SpringConfig(EntityManager em) {
-        this.em = em;
+    public SpringConfig(MemberRespository memberRespository) {
+        this.memberRespository = memberRespository;
     }
         @Bean
     public MemberService memberService() {
-        return new MemberService(memberRespository());
+        return new MemberService(memberRespository);
     }
 
-    @Bean
-    public MemberRespository memberRespository() {
+//    @Bean
+//    public MemberRespository memberRespository() {
 //        return new MemoryMemberRepository();
-        return new JpaMemberRepository(em);
-    }
+//        return new JpaMemberRepository(em);
+//    }
 }
